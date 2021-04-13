@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import {postKeyValueRequest} from '@/utils/request';
+
 export default {
   name: 'Login',
   data () {
@@ -60,7 +62,12 @@ export default {
     submitLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          alert('submit!!')
+          // alert('submit!!')
+          postKeyValueRequest('/doLogin', this.loginForm).then(res => {
+            if (res) {
+              alert(JSON.stringify(res))
+            }
+          })
         } else {
           this.$message.error('请认真填写数据！')
           return false
