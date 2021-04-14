@@ -8,6 +8,13 @@ axios.interceptors.response.use(res => {
     })
     return
   }
+  // 请求成功前端提示
+  if (res.data.msg) {
+    Message.success({
+      message: res.data.msg
+    })
+  }
+
   return res.data
 }, error => {
   if (error.response.status === 504 || error.response.status === 404) {
@@ -49,12 +56,43 @@ export const postKeyValueRequest = (url, params) => {
         for (let i in data) {
           ret += encodeURIComponent(i) + '=' + encodeURIComponent(data[i]) + '&'
         }
-        console.log(ret)
         return ret
       }
     ],
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
+  })
+}
+
+export const postRequest = (url, params) => {
+  return axios({
+    method: 'post',
+    url: `${baseURL}${url}`,
+    data: params
+  })
+}
+
+export const getRequest = (url, params) => {
+  return axios({
+    method: 'get',
+    url: `${baseURL}${url}`,
+    data: params
+  })
+}
+
+export const putRequest = (url, params) => {
+  return axios({
+    method: 'put',
+    url: `${baseURL}${url}`,
+    data: params
+  })
+}
+
+export const deleteRequest = (url, params) => {
+  return axios({
+    method: 'delete',
+    url: `${baseURL}${url}`,
+    data: params
   })
 }

@@ -34,15 +34,13 @@
 </template>
 
 <script>
-import {postKeyValueRequest} from '@/utils/request';
-
 export default {
   name: 'Login',
   data () {
     return {
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: '123'
       },
       checked: true,
       rules: {
@@ -63,9 +61,10 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           // alert('submit!!')
-          postKeyValueRequest('/doLogin', this.loginForm).then(res => {
+          this.postKeyValueRequest('/doLogin', this.loginForm).then(res => {
             if (res) {
-              alert(JSON.stringify(res))
+              window.sessionStorage.setItem('user', JSON.stringify(res.data))
+              this.$router.replace('/home')
             }
           })
         } else {
@@ -86,7 +85,7 @@ export default {
   border-radius: 15px;
   background-clip: padding-box;
   margin: 180px auto;
-  width: 350px;
+  width: 400px;
   padding: 25px 35px 25px 35px;
   border: 1px solid #eaeaea;
   background-color: white;

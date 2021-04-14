@@ -13,5 +13,8 @@ export default {
 </script>
 
 <style>
-
+@font-face {
+  font-family: "wenzang";
+  src: url("./assets/font/问藏书房.ttf");
+}
 </style>
