@@ -1,6 +1,12 @@
 <template>
-  <div>
-    test1
+  <div class="box">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
@@ -10,6 +16,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.el-header {
+  background-color: khaki;
+}
+.el-aside {
+  background-color: lawngreen;
+}
+.el-main {
+  background-color: lightpink;
+}
 
 </style>

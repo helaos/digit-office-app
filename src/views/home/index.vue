@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="home-box">
     <el-container>
+      <!-- 页面头部 -->
       <el-header class="home-header">
         <div class="title">摩云办公</div>
         <el-dropdown @command="commandHandler">
           <div class="el-dropdown-link">
             <span class="menu-username">{{ user.name }}</span>
-            <el-avatar :src="user.userface" size="medium">
+            <el-avatar :src="user.avatar" size="medium">
               <img
                 src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
               />
@@ -19,11 +20,13 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
-      <el-container>
+      <!-- 下边主体 -->
+      <el-container style="height: 100%">
+        <!-- 侧边栏 -->
         <el-aside style="width: 200px">
           <el-menu
             router
-            v-for="(item, index) in $router.options.routes"
+            v-for="(item, index) in routes"
             :key="index"
           >
             <el-submenu :index="item.path" v-if="!item.hidden">
@@ -39,6 +42,7 @@
             </el-submenu>
           </el-menu>
         </el-aside>
+        <!-- 主题内容 -->
         <el-main>
           <router-view />
         </el-main>
@@ -76,6 +80,11 @@ export default {
       }
     },
 
+  },
+  computed: {
+    routes() {
+      return this.$router.options.routes
+    }
   }
 }
 </script>
@@ -103,6 +112,8 @@ export default {
   font-family: "wenzang", "仿宋", "微软雅黑";
   color: #fff;
 }
+
+
 /* el 自身样式 */
 .el-dropdown-link {
   cursor: pointer;
@@ -115,5 +126,13 @@ export default {
 }
 .menu-username {
   margin-right: 8px;
+}
+/* 侧边栏样式 */
+html,
+body,
+#app,
+home-box,
+.el-container {
+  height: 100%;
 }
 </style>
