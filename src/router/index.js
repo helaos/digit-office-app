@@ -14,25 +14,6 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: () => import('@/views/home'),
-    redirect: '/test1',
-    children: [
-      // 测试路由
-      {
-        path: '/test1',
-        name: 'Test1',
-        component: () => import('@/views/test/Test1')
-      },
-      {
-        path: '/test2',
-        name: 'Test2',
-        component: () => import('@/views/test/Test2')
-      }
-    ]
-  },
-  {
-    path: '/sss',
-    name: 'Test1',
-    component: () => import('@/views/test/Test1')
   },
 ]
 

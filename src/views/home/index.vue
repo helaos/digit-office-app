@@ -24,14 +24,10 @@
       <el-container style="height: 100%">
         <!-- 侧边栏 -->
         <el-aside style="width: 200px">
-          <el-menu
-            router
-            v-for="(item, index) in routes"
-            :key="index"
-          >
+          <el-menu router v-for="(item, index) in routes" :key="index">
             <el-submenu :index="item.path" v-if="!item.hidden">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i class="home-icon" :class="item.iconCls"></i>
                 <span>{{ item.name }}</span>
               </template>
               <div v-for="(child, i) in item.children" :key="i">
@@ -44,6 +40,10 @@
         </el-aside>
         <!-- 主题内容 -->
         <el-main>
+          <el-breadcrumb separator-class="el-icon-arrow-right" >
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="this.$router.currentRoute.path!=='/home'">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+          </el-breadcrumb>
           <router-view />
         </el-main>
       </el-container>
@@ -68,6 +68,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.$store.commit('initRoutes', [])
           this.getRequest('/logout')
           window.sessionStorage.removeItem('user')
           this.$router.replace('/')
@@ -82,8 +83,8 @@ export default {
 
   },
   computed: {
-    routes() {
-      return this.$router.options.routes
+    routes () {
+      return this.$store.state.routes
     }
   }
 }
@@ -113,7 +114,6 @@ export default {
   color: #fff;
 }
 
-
 /* el 自身样式 */
 .el-dropdown-link {
   cursor: pointer;
@@ -127,12 +127,10 @@ export default {
 .menu-username {
   margin-right: 8px;
 }
-/* 侧边栏样式 */
-html,
-body,
-#app,
-home-box,
-.el-container {
-  height: 100%;
+
+/* icon */
+.home-icon {
+  color: #409aff;
+  margin-right: 0.5em;
 }
 </style>

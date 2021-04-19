@@ -21,6 +21,7 @@
           v-model="loginForm.password"
           auto-complete="off"
           placeholder="请输入用户密码"
+          @keydown.enter.native="submitLogin"
         ></el-input>
       </el-form-item>
       <el-form-item size="normal">
@@ -64,7 +65,8 @@ export default {
           this.postKeyValueRequest('/doLogin', this.loginForm).then(res => {
             if (res) {
               window.sessionStorage.setItem('user', JSON.stringify(res.data))
-              this.$router.replace('/home')
+              let path = this.$route.query.redirect
+              this.$router.replace((path === '/' || path === undefined) ? '/home' : path)
             }
           })
         } else {

@@ -1,15 +1,15 @@
 <template>
   <div>
-    test2
+    员工奖惩
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Test2'
+  name: 'PerEc'
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
