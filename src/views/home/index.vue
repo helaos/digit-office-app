@@ -1,5 +1,5 @@
 <template>
-  <div class="home-box">
+  <div id="home-box">
     <el-container>
       <!-- 页面头部 -->
       <el-header class="home-header">
@@ -40,9 +40,14 @@
         </el-aside>
         <!-- 主题内容 -->
         <el-main>
-          <el-breadcrumb separator-class="el-icon-arrow-right" >
-            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item v-if="this.$router.currentRoute.path!=='/home'">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item
+              v-if="this.$router.currentRoute.path !== '/home'"
+              >{{ this.$router.currentRoute.name }}</el-breadcrumb-item
+            >
           </el-breadcrumb>
           <router-view />
         </el-main>
@@ -91,6 +96,30 @@ export default {
 </script>
 
 <style scoped>
+#home-box {
+  height: 100vh;
+  width: 100vw;
+}
+.el-container {
+  height: 100%;
+}
+
+.el-aside {
+  background-color: #8dacca38;
+  box-shadow: 0 3px 5px #b9b9b9;
+  /* text-align: center; */
+}
+.el-aside ul {
+  background-color: #ffffff38;
+  color: #333;
+  line-height: 200px;
+  box-shadow: 0 1.5px 5px #b9b9b9;
+}
+
+.el-aside ul li {
+  box-shadow: 0 1px 5px #b9b9b9;
+}
+
 .home-header {
   display: flex;
   align-items: center;
